@@ -1,4 +1,4 @@
-physcomp-f15
+60-223-f16
 ============
 
 This repository provides course materials for several courses in Physical
