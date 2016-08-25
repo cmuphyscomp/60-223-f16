@@ -19,17 +19,7 @@
       is controlled to a constant level despite changes in the load.</p>
 
 	  
-    <p>We will use two basic categories of voltage regulators: linear and
-      switching.</p>
-
-    <p>In brief, a linear regulator acts as a variable resistor governed by
-      feedback to keep the output voltage at a fixed level.  Linear regulators
-      can only step voltages down, and the excess energy is dissipated as heat.
-      So for example, a 5V linear regulator providing a 500&#160;mA current from
-      a 12V supply creates a 7V voltage drop.  That represents 3.5&#160;Watts of
-      heat dissipated in the package, which typically means the package needs a
-      good heatsink to carry that heat away.
-    </p>
+    <p>In this exercise we will be using a switching regulator.</p>
 
     <p>A switching regulator chops the input current at a high frequency and
       either pulses it through an inductor (a coil) to generate higher voltages
@@ -40,11 +30,14 @@
       efficiency almost always outweighs the complexity in consumer
       applications, especially for battery circuits.</p>
 
+    <p>Unless you need efficiency (which is rarely the case) or a regulator that
+       can step up a voltage, a linear regulator is usually the safest bet.</p>
+
 
     <h4>Steps and observations</h4>
 
     <ol>
-      <li>Wire up each circuit, being very careful to observe the correct input
+      <li>Wire up the circuit, being very careful to observe the correct input
 	polarity.</li>
 
       <li>Measure the unloaded outputs.  Not all switching regulators perform
@@ -54,25 +47,17 @@
 	E.g., dissipating 100&#160;mA from a 5V regulator can be accomplished
 	using a 0.5&#160;Watt 50&#160;ohm resistor, or a lamp or motor with
 	similar properties.  (Hint: a half-watt 50&#160;ohm resistor can be
-	formed from two quarter-watt 100&#160;ohm resistors in parallel.)</li>
+	formed from two quarter-watt 100&#160;ohm resistors in parallel. Check the 
+  linear regulator exercise to see the load resistor setup)</li>
       <li>Measure the loaded output.</li>
-      <li>For the switching regulators, using the oscilloscope try to observe
+      <li>Using the oscilloscope try to observe
 	the switching rate as a high-frequency fluctuation on the output.  This
 	signal might be 20-100&#160;kHz.</li>
     </ol>
 
     <h4>Comments</h4>
-
-    <p>In the first example of a linear regulator, the the load is only
-      consuming 2.5&#160;Watts of energy while the regulator dissipates
-      3.5&#160;Watts, so this circuit is operating at only 42% efficiency.  Linear
-      regulator circuits are simple to use and inexpensive, so they are
-      applicable for low-power applications or where efficiency and heating are
-      not a problem.  The primary advantage is they are potentially low-noise
-      compared to switching regulators, so they often appear in high-fidelity
-      audio applications.</p>
     
-    <p>In contrast, switching regulators typically operate as 85% efficiency or
+    <p>Switching regulators typically operate as 85% efficiency or
       higher.  The availability has been remarkably eased by the introduction of
       simple integrated circuits which implement the chopping and feedback
       function.  Consumer 'wall-wart' power supplies used to only use simple
@@ -92,15 +77,9 @@
 
   <img class="alignnone" src="voltage-regulation-step-down_bb.png" />
 <img class="alignnone" src="voltage-regulation-step-down_schem.png" />
-<img class="alignnone" src="voltage-regulation-step-up-step-down_bb.png" />
-<img class="alignnone" src="voltage-regulation-step-up-step-down_schem.png" />
-<img class="alignnone" src="voltage-regulation_bb.png" />
-<img class="alignnone" src="voltage-regulation_schem.png" />
     <h4>Other Files</h4>
     <ol>
       <li><a href="voltage-regulation-step-down.fzz">voltage-regulation-step-down.fzz</a></li>
-      <li><a href="voltage-regulation-step-up-step-down.fzz">voltage-regulation-step-up-step-down.fzz</a></li>
-      <li><a href="voltage-regulation.fzz">voltage-regulation.fzz</a></li>
     </ol>
   </body>
 </html>
