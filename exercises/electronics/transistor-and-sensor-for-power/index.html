@@ -33,14 +33,19 @@
 
     <h4>Comments</h4>
 
-    <p>In practice, transistor circuits usually have additional <em>bias
-      resistors</em> to supply positive or negative currents to keep the
-      transistor operating in the desired region. This is a deep topic which
-      leads into the art of analog circuit design.  For an idea of this, look up
-      &#8220;audio circuits&#8221; on Google Images
-      and <a href="https://www.google.com/search?q=audio+circuits&amp;tbm=isch">see
-      what comes out</a>.</p>
+    <p>This circuit takes advantage of the voltage resistor from an earlier lesson.
+     The photoresistor is in series with a bias resistor. As the resistance of the
+     photoresistor changes, the voltage of the transistor's ground pin relative to the
+     source pin (tied to ground) changes. This changes the amount of current that is
+     allowed to pass through the transistor, which in turn limits the speed of the motor.</p>
 
+    <p>The two 5.6k resistors in parallel are used to create an equivalent reistance of 2.8k.
+     As mentioned in the photoresistor with bias resistor exercise, different bias reisitor values
+     allow for different sensivity ranges for the photoresistor. Here the resistor value was found
+     through trial and error in order to create a voltage divider where the transistor is off when 
+     the photoresistor is uncovered, and on when it is covered. If your circuit is not working, try
+     changing the bias resistor value (lower values will be more sensitive).
+     </p>
     <p>This circuit is a very simple example of
       a <a href="http://en.wikipedia.org/wiki/Amplifier#Class_A">class-A
       amplifier</a> using
