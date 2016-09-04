@@ -11,12 +11,13 @@
  
     <p>Control a hobby servomotor module.</p>
 
-    <p>Hobby servos are feedback-controlled motors which move an output shaft to
+    <p>Servos are feedback-controlled motors which move an output shaft to
       a specified position.  Internally they use a potentiometer to measure the
       actual position.  The internal circuit compares the actual and commanded
       position and generates positive and negative motor current pulses to
       operate a tiny gearmotor.  They are a very convenient modular way to
-      create controlled physical motion.</p>
+      create controlled physical motion. However, due to the limited motion of the 
+      internal potentiometer, the servo also has a limited movement range (usually 180 degrees)</p>
 
     <p>The commanded position is specified using a specific format of PWM in
       which pulses with duration approximately 1-2&#160;ms repeat at
@@ -27,7 +28,7 @@
 
     <h4>Steps and observations</h4>
     <ol>
-      <li>Load and run the Servo/Sweep sketch.  This uses the Servo library, an included add-on to the base library.</li>
+      <li>Load and run the Servo/Sweep sketch (Examples->Servo->sweep).  This uses the Servo library, an included add-on to the base library.</li>
       <li>Observe the servo motion.</li>
       <li>Observe the PWM command signal on the oscilloscope.</li>
       <li>Try varying the numbers governing the motion limits.</li>
@@ -40,8 +41,7 @@
     <p>Note that trajectories and speed control are only possible by issuing position commands at intervals.</p>
 
     <p>As a challenge, rewrite the program to avoid <code>delay()</code> and
-      operate two servos simultanously on different trajectories.  This will be
-      taken up in more detail in an upcoming exercise.</p>
+      operate two servos simultanously on different trajectories.</p>
 
   <img class="alignnone" src="servo-sweep_bb.png" />
 <img class="alignnone" src="servo-sweep_img.jpg" />
