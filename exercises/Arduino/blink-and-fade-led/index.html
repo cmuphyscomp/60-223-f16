@@ -8,19 +8,53 @@
   <body>
     <h2>Exercise: Blink and Fade an LED</h2>
       <h4>Objective</h4>
-        <p>Blink and Fade an LED</p>
+        <p>Make an LED fade from dark to full bright and back using
+           the built in Arduino examples.</p>
 
+        <p>There are many times where we want to do more than just turn something on
+           or off using the Arduino. To do this we use the function: <code>analogWrite(pin, ouptut)</code>
+           (output can be any number from 0=off to 255=on). However, the Arduino can only ouput 0V or 5V, so there is no
+           true analog output (there are other components that can do this). 
+           In order to get around this, the Arduino uses Pulse Width Modulation (PWM). 
+           You can think of this as turning the pin on and off really fast while varying the amount of time
+           it is on vs. off. The larger the on-percentage, the brighter an LED would be or the faster a motor would turn
+           (check out the comments section for some examples). </p>
+        <p>Be careful when choosing pins to use with PWM
+           because not all of the Arduino Uno's pins can be used with the analogWrite function. Only the digital
+           pins with the ~ next to the number can be used (3, 5, 6, 9, 10, 11).</p>
       <h4>Steps and observations</h4>
         <ol>
-         <li>Blink and Fade an LED</li>
+         <li>Build the circuit below.</li>
+         <li>Open the Fade sketch under File->Examples->01.Basics->Fade.</li>
+         <li>Upload the sketch to your arduino and watch the result.</li>
+         <li>Use the Ossillosope to watch the output from the Arduino Uno (you can probe the resistor lead).
+         <li>Experiment by changing the delay length and the fadeAmount variable.</li>
+         <li>Try changing the delay and the fadeAmount variable to make the output look like the blink example</li>
         </ol>
 
       <h4>Comments</h4>
-        <p>Blink and Fade an LED</p>
-
+        <img class="alignnone" src="blink-and-fade-led_bb.png" />
+        <img class="alignnone" src="blink-and-fade-led_schem.png" />
+        <p></p>
+        <p>Here are some examples of the <code>analogWrite(pin, output)</code> function viewed on an
+           oscilloscope.</p>
+        <ol>
+          <li>
+            <p><code>analogWrite(pin, 127)</code></p>
+            <img class="alignnone" src="127_pwm.png"/>
+          </li>
+          <li>
+            <p><code>analogWrite(pin, 50)</code></p>
+            <img class="alignnone" src="50_pwm.png"/>
+          </li>
+          <li>
+            <p><code>analogWrite(pin, 200)</code></p>
+            <img class="alignnone" src="200_pwm.png"/>
+          </li>
+        </ol>
       <h4>Other Files</h4>
         <ol>
-          <li>Blink and Fade an LED</li>
+          <li><a href="blink-and-fade-led.fzz">blink-and-fade-led.fzz</a></li>
         </ol>
         
   </body>

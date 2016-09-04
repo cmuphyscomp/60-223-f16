@@ -8,19 +8,46 @@
   <body>
     <h2>Exercise: Sensor Driven LED  </h2>
       <h4>Objective</h4>
-        <p>Sensor Driven LED  </p>
+        <p>Read a sensor input and control several external LEDs.</p>
+        <p>A microcontroller isn&#8217;t very useful without some kind of hardware attached.
+           This exercise combines connecting a photosensor and external LED outputs via a
+           control program.</p>
 
       <h4>Steps and observations</h4>
         <ol>
-         <li>Sensor Driven LED  </li>
+         <li>Wire up the circuit on the breadboard.  The photograph below shows a
+             suggested layout.</li>
+        <li>Load and run the <a class="reference external" href="SensorFade.ino">SensorFade</a> sketch.</li>
+        <li>Observe the initial blink pattern to make sure both LEDs can light.  If one
+            doesn&#8217;t light, try reversing the LED polarity or checking your wiring.</li>
+        <li>Observe the LED illumination after the blink pattern.  Does varying the level
+            of light on the photocell fully cross-fade between the two LEDs?</li>
+        <li>Measure the voltage on A0 over the available range of photocell illumination.
+            Adjust the values of VLOW and VHIGH in the code to this voltage range and
+            re-load the code.</li>
+        <li>Try disconnecting A0 so it is <em>floating</em> and see what happens when you
+            connect your finger to it using just a jumper wire.  The input is
+            high-impedance so even very tiny skin currents can change the voltage on the
+            input.</li>
         </ol>
 
       <h4>Comments</h4>
-        <p>Sensor Driven LED  </p>
+        <p>This example uses a number of programming features:</p>
+        <ol>
+          <li>infinite loops</li>
+          <li>calibrating and scaling analog inputs</li>
+          <li>pulse-width modulation of outputs</li>
+          <li>use of <tt class="xref cpp cpp-func docutils literal"><span class="pre">map()</span></tt> and <tt class="xref cpp cpp-func docutils literal"><span class="pre">constrain()</span></tt></li>
+        </ol>
+        <p>For a challenge, see if you figure out what controls the rate and pattern of the
+           blinking of the onboard LED.  Can you produce an asymmetric pattern?</p>
+
+        <img class="alignnone" src="sensor-fade.png">
 
       <h4>Other Files</h4>
         <ol>
-          <li>Sensor Driven LED  </li>
+          <li><a href="SensorFade.ino">SensorFade.ino</a></li>
+          <li><a href="sensor-fade.sch">sensor-fade.sch</a></li>
         </ol>
         
   </body>
