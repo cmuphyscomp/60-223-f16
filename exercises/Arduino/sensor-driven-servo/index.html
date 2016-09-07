@@ -8,19 +8,36 @@
   <body>
     <h2>Exercise: Sensor Driven Servo</h2>
       <h4>Objective</h4>
-        <p>Sensor Driven Servo</p>
+        <p>Control the position of a servo using a potentiometer and the built in
+           Arduino example. Also, adjust the example code to work with a new circuit.</p>
+
+        <p>The servo knob sketch uses the <code>map(value, fromLow, fromHigh, toLow, toHigh)</code>
+           function that we saw briefly in the sensor-driven-led exercise. This function takes 
+           a value within a certain range and maps it onto a different range. For example, the ADC on
+           the Arduino Uno gives a value from 0 to 1023. If I wanted to display that on a 10 segment 
+           bar graph LED, I could use the statement: 
+           <code>height = map(sensorVal, 0, 1023, 0, 10);</code> to find out how high the bar graph should be.</p>
 
       <h4>Steps and observations</h4>
         <ol>
-         <li>Sensor Driven Servo</li>
+         <li>Build the initial circuit below</li>
+         <li>Load the Servo Knob (Examples->Servo->Knob) sketch and upload it to your Arduino</li>
+         <li>Read throught the code in order to understand how it controls the position of the servo</li>
+         <li>Swap out the potentiometer in the circuit for another sensor (could be a voltage divider with a
+             photoresistor).
+         <li>Try using your new circuit. Does it allow you to (somewhat) accurately control the servo's position
+             with a new sensor? If not, try changing the map function to allow for more accurate control (maybe map
+             a slice of the sensor output). Just make sure that the servo is never set to a value less than 0 or greater than 180
+             (check out the <code>constrain()</code> function in the Arduino reference.</li>
         </ol>
 
       <h4>Comments</h4>
-        <p>Sensor Driven Servo</p>
+        <img class="alignnone" src="sensor-driven-servo_bb.png" />
+        <img class="alignnone" src="sensor-driven-servo_schem.png" />
 
       <h4>Other Files</h4>
         <ol>
-          <li>Sensor Driven Servo</li>
+          <li><a href="sensor-driven-servo.fzz">sensor-driven-servo.fzz</a></li>
         </ol>
         
   </body>
