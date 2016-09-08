@@ -8,19 +8,70 @@
   <body>
     <h2>Exercise: I2C Sensor with Arduino</h2>
       <h4>Objective</h4>
-        <p>I2C Sensor with Arduino</p>
+        <p>Read data from a sensor that communicates to the arduino via I2C.</p>
+
+        <p>The I2C sensor that we will be using is the MPU6050 which is a 3-axis accelerometer and gyroscope</p>
+
+        <p>I2C ("I-two-C" or "I-squared-C") is a very common protocol among microcontrollers. 
+           You will probably see it most when using the many, many sensor and actuator breakout boards that communicate
+           using I2C (You can even hook up multiple arduinos using I2C). 
+           I2C consists of two communication lines: SDA (data) and SCL (clock). Additionally,
+           You will have to run power and ground to each device (or "slave"). Additionally, multiple I2C slaves 
+           can be connected on the same SDA and SCL lines, which means you could potentially numerous 
+           actuators and sensors while leaving all of your digital and anlog pins free (However, on older boards, the I2C
+           lines are only avaliable on A4 and A5). This all sounds amazing, but there is one downside to I2C, its speed.
+           I2C is much slower than using the analog or digital pins on your 
+           arduino to read sensor data. You probably will not need to worry about this, but it is important to keep in mind.</p>
+
+        <p>When connecting multiple I2C devices to the same SDA and SCL lines, your Arduino needs
+           a way to distinguish between the devices. It does this using the I2C address of each slave.
+           Usually an I2C devices has a fixed address or a small range of addresses that you can set
+           it to by tying different pins to power or ground. You can use this to avoid address conflicts 
+           between devices. Check the device's datasheet. If you do change
+           the address from the default, make sure you update your code, or your Arduino will try to communicate
+           with something that isn't there. Most libraries will have a parameter for the address
+           when you initialize the sensor. Unfortunatly, this does mean that if you have a sensor with
+           a fixed address, you will only be able to hook up one per I2C bus.</p>
+
+        <p>While most I2C sensors, and most breakout boards you encounter are designed to run at 5V
+           it is VERY important to be aware that many boards run on 3.3V only. Connecting them to 
+           your 5V Arduino could fry them. Before you hook up a breakout board you haven't worked with
+           it is a good idea to double check what voltages it can run on. If it is a 3.3V only board, 
+           you will need to use a <a href="https://www.sparkfun.com/products/12009">level shifter</a>
+           to convert the 5V data lines of the arduino to 3.3V data lines. Check the part bins for 
+           level shifters if you need them.</p>
 
       <h4>Steps and observations</h4>
         <ol>
-         <li>I2C Sensor with Arduino</li>
+         <li>First we need to install the library that lets us communicate with the MPU6050 chip.
+             When you are putting the libraries into your arduino folder in the next step, you only
+             need to move the I2Cdev and MPU6050 folders, you won't need the others.
+         <li>Go <a href="http://www.i2cdevlib.com/usage">here</a> to download the library and see
+             instructions on how to install them (the folder that is mentioned is the folder named Arduino
+             in your documents folder. You will need to add a folder named "libraries" within the Arduino folder
+             if it does not already exist).</li>
+         <li>Wire up the circuit below.</li>
+         <li>Open up the MPU6050 exercise (File->Exercises->MPU6050->MPU6050_raw). If you don't see it even
+             after installing the library, try restarting Arduino.</li>
+         <li>Open the serial monitor and watch the output</li>
+         <li>If your output starts as all zeros or suddenly switches to all zeros, the sensor is in sleep mode. 
+             Try adding the line: <code>accelgyro.setSleepEnabled(false);</code> to the end of the <code>setup</code> function.
+         <li>Check the markings on the breakout for the directions of the axis and try to get the output of 
+             a single axis to change on the serial monitor</li>
         </ol>
 
       <h4>Comments</h4>
-        <p>I2C Sensor with Arduino</p>
+        <p>For a challenge, try to get an example sketche working for the 
+           <a href="https://www.adafruit.com/product/1083">Adafruit I2C ADC</a> or the
+           <a href="https://www.adafruit.com/products/815">Adafruit 16 bit PWM driver</a>
+           both of which are in the part bins and have very good tutorials and libries provided by Adafruit.
+           </p>
+
+           <img class="alignnone" src="I2C-sensor_bb.png" />
 
       <h4>Other Files</h4>
         <ol>
-          <li>I2C Sensor with Arduino</li>
+          <li><a href="I2C-sensor.fzz">I2C-sensor.fzz</a></li>
         </ol>
         
   </body>
