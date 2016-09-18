@@ -29,11 +29,13 @@
     <ol>
       <li>Adjust the motor power supply for a safe full-speed voltage. (Many lab
 	motors run on less than than the 12V drawn on the schematic.)</li>
-      <li>Load and run the Blink sketch.</li>
+      <li>Load and run the Blink sketch. NOTE: the circuit below has the gate of the transistor plugged into
+          pin 9. For the blink sketch you will need to rewire this to 13 (and then back to 9
+          when you run the fade sketch below).</li>
       <li>Note that pin 13 is still connected to the onboard LED.  Observe the motor and LED activity.</li>
       <li>This time, explore the limits of timing.  How short a pulse will still create movement?</li>
       <li>Load the Fade sketch, which uses <code>analogWrite()</code> to create a PWM waveform on pin 9.</li>
-      <li>Rewire the transistor base to pin 9.</li>
+      <li>Rewire the transistor gate to pin 9.</li>
       <li>Observe the change in motor motion.</li>
       <li>Observe the PWM signal on pin 9 using the oscilloscope.</li>
     </ol>
