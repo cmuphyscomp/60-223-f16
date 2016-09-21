@@ -3,25 +3,62 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="../../../support/css/physcomp.css" />
-    <title>Exercise: NodeMCU I2C ADC</title>
+    <title>Exercise: NodeMCU recieve OSC</title>
   </head>
   <body>
-    <h2>Exercise: NodeMCU I2C ADC</h2>
+    <h2>Exercise: NodeMCU recieve OSC</h2>
       <h4>Objective</h4>
-        
+        <p>Use python code on a computer to control the onboard LED of the NodeMCU microcontroller.</p>
+
+        <p>The NodeMCU has a wifi chip, so why don't we use it! There are many different libraries
+           and strategies for sending data over wifi with the NodeMCU. However, one super easy way
+           is using the Open Sound Control (OSC) protocol. OSC was originally developed as an open
+           source protocol for audio equipment. However, it is also a great protocol for easy wifi
+           communication. An OSC packet is either a bundle or a message. In this exercise we will 
+           be sending a bundle (which is just multiple messages sent at once) with a single message
+           (why don't we just send the message you ask? Well, the NodeMCU library we are using doesn't 
+           support recieving messages, only bundles). Each message has both an address and data. The
+           address allows both the client (sender) and the server (reciever) to identify the data and 
+           always starts with a "/" character. 
+           The data can be an int, float, or string. If you want to read up on the full protocol, and 
+           additional features like timestamps and additional data types check out the 
+           <a href="http://opensoundcontrol.org/spec-1_0">full spec</a>.</p>
+
+        <p>Another great thing about OSC is that there are lots of libraries that implement the protocol.
+           These include both Arduino and Python libraries which we will be using.</p>
       <h4>Steps and observations</h4>
         <ol>
-          talk about ports and ips and how they have to match
-          requires python 3
-          installing python libraries
-          
+          <li>First, we need to prep our computers a bit:
+            <ol>
+              <li>For the OSC library, we need to be running python 3. You can download the latest version 
+                  <a href="https://www.python.org/downloads/">here</a>.</li>
+              <li>The python library we will be using is <a href="https://pypi.python.org/pypi/python-osc">
+                  pythonosc</a>. Follow the installations in the link (btw, pip will come with python if you
+                  download it from python's site, but not if you are using the built in python on your computer).</li>
+              <li>We need to make sure that our firewall isn't causing any issues. On mac, the firewall settings are under
+                  System Preferences -> Security & Privacy -> Firewall. On PC, it is under Control Panel -> System and Security
+                  -> Windows Firewall. You only need to allow the ports we will be using in the examples which are 8888 and 9999.</li>
+            </ol>
+          </li>
+          <li>Load the example <a href="ESP8266ReceiveBundle/ESP8266ReceiveBundle.ino">NodeMCU sketch</a>
+              and upload it</li>
+          <li>Grab the example <a href="osc_client.py">python program</a> and open it in your editor of choice.</li>
+          <li>We need to change the ip address in the python program to match the ip address of the NodeMCU so it knows where
+              to send the data. To find the Node's ip address, open up the serial monitor and hit reset on your NodeMCU
+              (if you just see garbage, make sure to change the baud rate of the serial monitor to 115200). It should print
+              out the ip address. Be careful when using this in projects, the Node's ip address might change between restarts</li>
+          <li>Save the python sketch with the updated ip address and run it (remember, it's python3, not python2!)</li>
+          <li>Watch as the LED on your NodeMCU blinks as it recieves data from the computer. You will notice that the LED actually
+              turns off when the computer sends a 1 and on when it sends a 0. This is normal, the built in LED on the NodeMCU
+              is just weird that way.</li>
+          <li>Adjust the python program so the LED blinks in a different pattern</li>
         </ol>
       <h4>Comments</h4>
-          <img class="alignnone" src="NodeMCU-I2C-ADC_bb.png" />
-          <img class="alignnone" src="NodeMCU-I2C-ADC_schem.png"/>
+        <p>No circuit!</p>
       <h4>Other Files</h4>
         <ol>
-          <li><a href="NodeMCU-I2C-ADC.fzz">NodeMCU-I2C-ADC.fzz</a></li>
+          <li><a href="ESP8266ReceiveBundle/ESP8266ReceiveBundle.ino">ESP8266ReceiveBundle.ino</a></li>
+          <li><a href="osc_client.py">osc_client.py</a></li>
         </ol>
         
   </body>

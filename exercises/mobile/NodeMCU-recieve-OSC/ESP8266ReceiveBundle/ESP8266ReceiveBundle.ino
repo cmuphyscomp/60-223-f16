@@ -7,6 +7,10 @@
 
   This example code is in the public domain.
 
+  Edited by Joseph Paetz for Intro to Physical Computing (60-223)
+    at Carnegie Mellon University
+    9-20-16
+
 --------------------------------------------------------------------------------------------- */
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
@@ -21,6 +25,8 @@ char pass[] = "ideate60223";                    // your network password
 WiFiUDP Udp;
 const IPAddress outIp(10,40,10,105);        // remote IP (not needed for receive)
 const unsigned int outPort = 9999;          // remote port (not needed for receive)
+
+// this is the port that our computer is sending the data to
 const unsigned int localPort = 8888;        // local port to listen for UDP packets (here's where we send the packets)
 
 
@@ -40,6 +46,7 @@ void setup() {
   Serial.println(ssid);
   WiFi.begin(ssid, pass);
 
+  //wait until connected
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -57,7 +64,7 @@ void setup() {
 
 }
 
-
+// we will call this function when we recieve a message
 void led(OSCMessage &msg) {
   ledState = msg.getInt(0);
   digitalWrite(BUILTIN_LED, ledState);
@@ -67,13 +74,18 @@ void led(OSCMessage &msg) {
 
 void loop() {
   OSCBundle bundle;
+  //get the data from the network
   int size = Udp.parsePacket();
 
+  //only do stuff if we actually got data
   if (size > 0) {
     while (size--) {
       bundle.fill(Udp.read());
     }
+    
     if (!bundle.hasError()) {
+      // if the bundle has a message with the
+      // address "/led", call the function led
       bundle.dispatch("/led", led);
     } else {
       error = bundle.getError();
