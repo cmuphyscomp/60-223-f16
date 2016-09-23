@@ -84,9 +84,19 @@ void loop() {
     }
     
     if (!bundle.hasError()) {
-      // if the bundle has a message with the
-      // address "/led", call the function led
+      /* if the bundle has a message with the
+       * address "/led", call the function led.
+       * If the message that the client is sending
+       * does not have this address, the NodeMCU 
+       * wont do anything.
+       */
       bundle.dispatch("/led", led);
+
+      /* If you are also sending a message that has
+       *  the address "/motor", you could do something
+       *  with it here. 
+       */
+       //bundle.dispatch("/motor", motor_function);
     } else {
       error = bundle.getError();
       Serial.print("error: ");
