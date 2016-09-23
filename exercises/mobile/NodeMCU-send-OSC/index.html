@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../support/css/physcomp.css" />
+    <title>Exercise: NodeMCU send OSC</title>
+  </head>
+  <body>
+    <h2>Exercise: NodeMCU send OSC</h2>
+      <h4>Objective</h4>
+        <p>Use the NodeMCU web-enabled microcontroller to send sensor values to
+           a computer running a python OSC server.</p>
+
+        <p>In this exercise, we will be sending OSC messages (not bundles) from
+           the NodeMCU using the same UDP library that we used in the recieve
+           exercise. Just as a reminder, an OSC message consists of an address 
+           that starts with "/" and a piece of data which in our case will be
+           the state of a button connected to the NodeMCU.</p>
+      <h4>Steps and observations</h4>
+        <ol>
+          <li>Build the circuit below.</li>
+          <li>Load the example <a href="ESP8266sendMessage/ESP8266sendMessage.ino">NodeMCU sketch</a>
+              and upload it</li>
+          <li>Grab the example <a href="osc_server.py">python program</a> and open it in your editor of choice.</li>
+          <li>In the python program, change the ip address to your computer's ip address. NOT the NodeMCU's address
+              like the last exercise.</li>
+          <li>Run the python code and watch the data coming in from the NodeMCU. You should see 
+              the button's state being printed as well as an additional message from the NodeMCU
+              whenever the button goes from not pressed to pressed.</li>
+          <li>Change the recieving code to do different things with the incomming data. You could
+              even combine this with the previous exercise to have the NodeMCU's led light up when
+              the button is pressed, but have all the data be sent throught the computer. Or, you
+              could have the LED of a different NodeMCU light up when the button is pressed and use
+              the computer as a pass through. There are endless possiblities.</li>
+        </ol>
+        make note that you could hook up the adc from the earlier exercise and send back each pin on a different channel
+      <h4>Comments</h4>
+        <p>As a challenge, try hooking up the Adafruit I2C ADC from an earlier exercise.
+           Then, edit the example code (for both the NodeMCU and the computer)
+           to send the values of all 4 of the analog pins to the computer.</p>
+
+        <p>Now that we know how to send and receive OSC messages, you could 
+           have multiple NodeMCUs talking to each other. However, you will
+           need to be sending bundles instead of messages. Check out the
+           "UDPSendBundle" example sketch that is included in the OSC 
+           Arduino library. Additionally, you will need to know the ip address
+           of both of your NodeMCUs. For now you can just read their serial output
+           and re-upload code with the updated address. However, the ip addresses
+           may change and this wont work if the NodeMCUs are embedded in a project. If you
+           want to use multiple NodeMCUs to talk to each other talk to us about getting
+           your NodeMCUs static ip addresses on the lab router.</p>
+
+        <img class="alignnone" src="NodeMCU-send-OSC_schem.png" />
+      <h4>Other Files</h4>
+        <ol>
+          <li><a href="ESP8266sendMessage/ESP8266sendMessage.ino">ESP8266sendMessage.ino</a></li>
+          <li><a href="osc_server.py">osc_server.py</a></li>
+          <li><a href="NodeMCU-send-OSC.fzz">NodeMCU-send-OSC.fzz</a></li>
+        </ol>
+        
+  </body>
+</html>
