@@ -66,39 +66,55 @@ void setup() {
 
 // we will call this function when we recieve a message
 void led(OSCMessage &msg) {
-  ledState = msg.getInt(0);
-  digitalWrite(BUILTIN_LED, ledState);
-  Serial.print("/led: ");
-  Serial.println(ledState);
+  // check if the first piece of data is an int and if so, use it
+  if (msg.isInt(0)) {
+    ledState = msg.getInt(0);
+    digitalWrite(BUILTIN_LED, ledState);
+    Serial.print("/led: ");
+    Serial.println(ledState);
+  }
+
+  //if you had sent another piece of data you could do something with it here
+  /*
+  if (msg.isInt(1)) {
+    led2State = msg.getInt(1);
+    ...
+  }
+  */
 }
 
 void loop() {
-  OSCBundle bundle;
+  OSCMessage msg;
   //get the data from the network
   int size = Udp.parsePacket();
 
   //only do stuff if we actually got data
   if (size > 0) {
     while (size--) {
-      bundle.fill(Udp.read());
+      /*
+       * if your client was sending an osc bundle 
+       * instead of a message, this line would be:
+       * bundle.fill(Udp.read());
+       */
+      msg.fill(Udp.read());
     }
     
-    if (!bundle.hasError()) {
+    if (!msg.hasError()) {
       /* if the bundle has a message with the
        * address "/led", call the function led.
        * If the message that the client is sending
        * does not have this address, the NodeMCU 
        * wont do anything.
        */
-      bundle.dispatch("/led", led);
+      msg.dispatch("/led", led);
 
-      /* If you are also sending a message that has
+      /* If you are also sending a separate message that has
        *  the address "/motor", you could do something
        *  with it here. 
        */
-       //bundle.dispatch("/motor", motor_function);
+       //msg.dispatch("/motor", motor_function);
     } else {
-      error = bundle.getError();
+      error = msg.getError();
       Serial.print("error: ");
       Serial.println(error);
     }

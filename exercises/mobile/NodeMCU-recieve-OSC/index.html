@@ -14,18 +14,21 @@
            and strategies for sending data over wifi with the NodeMCU. However, one super easy way
            is using the Open Sound Control (OSC) protocol. OSC was originally developed as an open
            source protocol for audio equipment. However, it is also a great protocol for easy wifi
-           communication. An OSC packet is either a bundle or a message. In this exercise we will 
-           be sending a bundle (which is just multiple messages sent at once) with a single message
-           (why don't we just send the message you ask? Well, the NodeMCU library we are using doesn't 
-           support recieving messages, only bundles). Each message has both an address and data. The
-           address allows both the client (sender) and the server (reciever) to identify the data and 
-           always starts with a "/" character. 
+           communication. An OSC packet is either a bundle or a message. Bundles are just groups of
+           messages sent at one time. In this exercise we will just be sending a message.
+           Each message has both an address and one or more pieces of data. The address allows both 
+           the client (sender) and the server (reciever) to identify the data and the address always 
+           starts with a "/" character. For example "/led", "/a/1", and "/a/2" are all addresses. 
            The data can be an int, float, or string. If you want to read up on the full protocol, and 
            additional features like timestamps and additional data types check out the 
-           <a href="http://opensoundcontrol.org/spec-1_0">full spec</a>.</p>
+           <a href="http://opensoundcontrol.org/spec-1_0">full spec</a>. </p>
 
         <p>Another great thing about OSC is that there are lots of libraries that implement the protocol.
-           These include both Arduino and Python libraries which we will be using.</p>
+           These include both Arduino and Python libraries which we will be using. The arduino library is
+           written by the research lab that wrote the osc protocol and has great 
+           <a href="https://github.com/CNMAT/OSC">documumentation</a>. I would
+           highly recommend checking it out, esspecially te sections on Receiving Data, Routing/Dispatching,
+           and OSCBundles.</p>
       <h4>Steps and observations</h4>
         <ol>
           <li>First, we need to prep our computers a bit:

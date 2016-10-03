@@ -36,23 +36,24 @@ if __name__ == "__main__":
     while True:
         print("sending msg: " + str(LED_state))
 
-        # build the bundle to send to the NodeMCU
-        bundle = osc_bundle_builder.OscBundleBuilder(osc_bundle_builder.IMMEDIATELY)
+        #  - if you wanted to send a bundle, you could use:
+        #       bundle = osc_bundle_builder.OscBundleBuilder(osc_bundle_builder.IMMEDIATELY)
+        #       {build your message and add data to it like you do below}
+        #       bundle.add_content(msg1)
+        #       bundle.add_content(msg2)
+        #       bundle = bundle.build()
+        #       client.sen(bundle)
 
-        # build the message that will go in the bundle
-        # this is the address that the NodeMCU will be watching for
-        msg = osc_message_builder.OscMessageBuilder(address="/led")
+        # build the msg to send to the NodeMCU. This is the address that
+        # the NodeMCU will be watching for
+        msg = osc_message_builder.OscMessageBuilder(address = "/led")
 
         # add the data to the message
         msg.add_arg(LED_state)
         msg = msg.build()
 
-        # add the message to the bundle
-        bundle.add_content(msg)
-        bundle = bundle.build()
-
-        #send the bundle
-        client.send(bundle)
+        #send the message
+        client.send(msg)
 
         # if LED_state = 1, change to 0 and vice versa
         LED_state = 1 - LED_state
