@@ -22,7 +22,7 @@
 
 /* YOU WILL NEED TO CHANGE THIS IF NOT IN THE LAB! */
 char ssid[] = "PhysCompLab";          // your network SSID (name)
-char pass[] = "ideate60223.";         // your network password
+char pass[] = "";         // your network password
 
 WiFiUDP Udp;                                // A UDP instance to let us send and receive packets over UDP
 

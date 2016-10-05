@@ -19,7 +19,7 @@
 #include <OSCData.h>
 
 char ssid[] = "PhysCompLab";          // your network SSID (name)
-char pass[] = "ideate60223";                    // your network password
+char pass[] = "";                    // your network password
 
 // A UDP instance to let us send and receive packets over UDP
 WiFiUDP Udp;
