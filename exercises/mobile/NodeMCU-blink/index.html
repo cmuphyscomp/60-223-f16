@@ -10,16 +10,16 @@
       <h4>Objective</h4>
         <p>Make a LED blink using the NodeMCU micro controller.</p>
 
-        <p>The NodeMCU is a wifi enabled micro controller based on the ESP8266 12E 
+        <p>The NodeMCU is a wifi enabled micro controller based on the <a href="https://en.wikipedia.org/wiki/ESP8266">ESP8266</a> (version 12E) 
            chip. The NodeMCU is low cost and can be programmed using the Arduino IDE. Like 
            other Arduinos, it has GPIO pins that can be used to read sensors and control 
-           actuation. Most Arduino sketches (especially all of the basic examples) 
+           actuators. Most Arduino sketches (especially all of the basic examples) 
            should work with minimal modification on the NodeMCU. Additionally, libraries have
            been developed to allow the NodeMCU (and any other ESP8266 based board) to
            send and recieve data over wireless.</p>
 
         <p>While the NodeMCU has a fair number of digital pins, it only has 1 analog pin. 
-           Watch out for that when designing your projects, you may need to use an I2C ADC board. 
+           Watch out for that when designing your projects; if you need more than one analog input pin, you will need to use an I2C ADC board. 
            Additionally, many external ADC boards communicate via I2C which is not listed on the 
            pinout diagram. However, D1 (GPIO 5) is SCL and D2 (GPIO 4) is SDA which makes sense since 
            the Arduino’s I2C lines are A5 for SCL and A4 for SDA.</p>
@@ -38,38 +38,43 @@
               the Arduino IDE. This process is the same for many boards that use the Arduino IDE
               (the URL in the next step changes for other boards).</li>
           <li>Open the Arduino IDE, and go to: Arduino->Preferences (Mac) or File->Preferences (PC), 
-              and add this URL: "http://arduino.esp8266.com/stable/package_esp8266com_index.json)"
+              and add this URL: "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
               into the “Additional Boards Manager URLs” box.</li>
           <li>Open Tools->Board->Boards Manager and scroll until you find the 
               “esp8266 by ESP8266 Community” package. Click on it, and install the latest version. 
               There should now be a new section under Tools->boards that lists several ESP8266 boards.</li>
-          <li>Build the circuit shown below. </li>
-          <li>Bring up the Example Blink sketch. Even though it uses pin 13 this sketch and the circuit
-              below are correct. This is because the labels on the NodeMCU board do not match up with 
-              the actual GPIO pin number. There are 2 solutions: 
-            <ol>
-              <li>Look at the image below with all of the GPIO pins marked (you will still want to 
-                  check this out no matter what because it lists the protocols for the different pins).</li>
-              <li>Instead of writing 7 for our pin, write “D7”. The compiler for the NodeMCU will know 
-                  to switch this to 13.</li>
-            </ol>
-              No matter what you do, you should use <code>#define</code> statements at the top of your
-              code to define all of your pins with intelligable names (see: 
-              <a href=https://www.arduino.cc/en/Reference/Define>#define reference</a>)
+          <li>Build the circuit shown below. <br>
+            <em>Note 1: </em>the Pin Numbering of the NodeMCU: each pin has a name that's printed on the circuit board, like &quot;D0&quot;, &quot;D7&quot;, &quot;RX&quot; or &quot;TX&quot;. Each pin also has &quot;GPIO&quot; number; if you look at the diagram below, you will see that &quot;D7&quot; is equivalent to GPIO13. This means that in the Arduino IDE you can control the state of that pin using the pin number 13. For all the GPIO pins, you can also type the name of then (i.e. &quot;D7&quot;) into the Aduino IDE and the compiler for the NodeMCU will know 
+          to switch this to 13. In other words, either of these will work:<br>
+          <br>
+          pinMode(D7, OUTPUT);<br>
+          <br>
+          or<br>
+          <br>
+          pinMode(13, OUTPUT);          <br>
+            <br>          
+            Note that writing the pin name (i.e. &quot;D7&quot;) only works for the GPIO pins, and not for the special pins like RX or TX.<br>
+            <em>Note 2: </em>use <code>#define</code> statements at the top of your
+          code to define all of your pins with intelligable names (see: <a href=https://www.arduino.cc/en/Reference/Define>#define reference</a>) </li>
+          <li>Open the Example Blink sketch (File-&gt;Examples-&gt;01.Basics-&gt;Blink). The defaul pin number 13 is in fact the same as &quot;D7&quot;, so you can leave the code unchanged. 
           <li>Under Tools, change the board to “NodeMCU 1.0 (ESP 12E Module)” (NOT “NodeMCU 0.9 (ESP 12 Module)”!!!).
               You should see some new options pop up in the tools menu. You can leave these as the defaults 
               (should be: 80MHz CPU Frequency, 4M (3M SPIFFS) Flash size, and 115200 upload speed).</li>
           <li>Also under tools, check the port. Choose whatever is available (should be a non-bluetooth port on Mac, 
-              or something COM4 or higher on PC). If there is no port available, or the one you have doesn’t work, 
+              or something like COM4 or COM_something on PC). If there is no port available, or the one you have doesn’t work, 
               then you need drivers for the USB to serial chip which can be found 
               <a href="https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx">here</a>.</li>
-          <li>Hit upload, wait for it to finish, and you should be done!</li>
+          <li>Hit upload, wait for it to finish, and you should be done. Note that a small surface-mount blue LED near the end of the board flashes while you are uploading code to the board. You may have to press the &quot;RST&quot; button on the NodeMCU to get the new code running.</li>
         </ol>
 
       <h4>Comments</h4>
+      <ol>
+        <li>The NodeMCU is a more affordable, more capable and more practical version of the popular <a href="https://www.adafruit.com/product/2471">Adafruit Huzzah</a>. If you run into problems with this board, you can often find the answer if you search the same problem with the Huzzah.
+      </ol>
+      <p>&nbsp;</p>
           <img class="alignnone" src="NodeMCU-blink_bb.png" />
           <img class="alignnone" src="NodeMCU-pins.png"/>
-      <h4>Other Files</h4>
+  <h4>Other Files</h4>
         <ol>
           <li><a href="NodeMCU-blink.fzz">NodeMCU-blink.fzz</a></li>
         </ol>

@@ -8,56 +8,64 @@
   <body>
     <h2>Exercise: NodeMCU recieve OSC</h2>
       <h4>Objective</h4>
-        <p>Use python code on a computer to control the onboard LED of the NodeMCU microcontroller.</p>
+        <p>Control a remote/wireless microcontroller from a computer connected to the same network. We will do this by using some python code on a computer to control the onboard LED of the NodeMCU microcontroller.</p>
 
         <p>The NodeMCU has a wifi chip, so why don't we use it! There are many different libraries
-           and strategies for sending data over wifi with the NodeMCU. However, one super easy way
-           is using the Open Sound Control (OSC) protocol. OSC was originally developed as an open
-           source protocol for audio equipment. However, it is also a great protocol for easy wifi
-           communication. An OSC packet is either a bundle or a message. Bundles are just groups of
+           and strategies for sending data over wifi with the NodeMCU. However, one super versatile and friendly way
+           to do this is by using the <a href="https://en.wikipedia.org/wiki/Open_Sound_Control">Open Sound Control (OSC) protocol</a>. OSC was originally developed as an open
+           source protocol for communication among audio hardware and software. However, it is also a great protocol for easy wifi
+           communication among any piece of hardware or software that speaks OSC. An OSC packet is either a bundle or a message. Bundles are just groups of
            messages sent at one time. In this exercise we will just be sending a message.
            Each message has both an address and one or more pieces of data. The address allows both 
            the client (sender) and the server (reciever) to identify the data and the address always 
            starts with a "/" character. For example "/led", "/a/1", and "/a/2" are all addresses. 
-           The data can be an int, float, or string. If you want to read up on the full protocol, and 
+           The data can be an int, float,  or string. If you want to read up on the full protocol, and 
            additional features like timestamps and additional data types check out the 
            <a href="http://opensoundcontrol.org/spec-1_0">full spec</a>. </p>
 
-        <p>Another great thing about OSC is that there are lots of libraries that implement the protocol.
-           These include both Arduino and Python libraries which we will be using. The arduino library is
-           written by the research lab that wrote the osc protocol and has great 
-           <a href="https://github.com/CNMAT/OSC">documumentation</a>. I would
-           highly recommend checking it out, esspecially te sections on Receiving Data, Routing/Dispatching,
-           and OSCBundles.</p>
+        <p>Another great thing about OSC is that there are lots of applications and libraries that implement the protocol. Some examples include: Ableton Live, Max, PureData, OpenFrameworks, Python, C++, Java, Arduino, Unity, etc; for a comprehensive list of software that can send and receive osc, look <a href="http://opensoundcontrol.org/implementations">here</a>.
+           By learning how to send and receive OSC messages from/to our NodeMCU microcontroller, we effectively become capable of communicating between our physical computing inventions, and any of these powerful applications. </p>
+        <p>&nbsp;</p>
       <h4>Steps and observations</h4>
         <ol>
           <li>First, we need to prep our computers a bit:
             <ol>
-              <li>For the OSC library, we need to be running python 3. You can download the latest version 
-                  <a href="https://www.python.org/downloads/">here</a>.</li>
+              <li>For the OSC library, we need to be running python 3. If you are not sure what version of python you have, you can run this command in the terminal: <br>
+                <br>
+                <pre>$ python -V</pre>
+                You can download the latest version <a href="https://www.python.org/downloads/">here</a>.</li>
               <li>The python library we will be using is <a href="https://pypi.python.org/pypi/python-osc">
-                  pythonosc</a>. Follow the installations in the link (btw, pip will come with python if you
-                  download it from python's site, but not if you are using the built in python on your computer).</li>
+                  pythonosc</a>. Follow the installations in the link. You can also install pythonosc using the python package manager, called 'pip', by running the following command:<br>
+                  <br>
+                  <pre>$ pip install python-osc</pre>
+If you do not have pip installed (you can tell by typing 'pip' in the command line), then install it using <a href="https://pip.pypa.io/en/stable/installing/">these instructions</a>. </li>
+              <li>Download and install OSC for the Arduino IDE from <a href="https://github.com/CNMAT/OSC">here</a>. The installation instructions are the same as those you followed to install drivers for the I2C ADC board from Adafruit, in the last exercise.</li>
               <li>We need to make sure that our firewall isn't causing any issues. On mac, the firewall settings are under
-                  System Preferences -> Security & Privacy -> Firewall. On PC, it is under Control Panel -> System and Security
-                  -> Windows Firewall. You only need to allow the ports we will be using in the examples which are 8888 and 9999.</li>
+                System Preferences -> Security & Privacy -> Firewall. On PC, it is under Control Panel -> System and Security
+                -> Windows Firewall. You only need to allow the ports we will be using in the examples which are 8888 and 9999.</li>
             </ol>
           </li>
           <li>Load the example <a href="ESP8266ReceiveBundle/ESP8266ReceiveBundle.ino">NodeMCU sketch</a>
-              and upload it</li>
+              and upload it. </li>
           <li>Grab the example <a href="osc_client.py">python program</a> and open it in your editor of choice.</li>
-          <li>We need to change the ip address in the python program to match the ip address of the NodeMCU so it knows where
-              to send the data. To find the Node's ip address, open up the serial monitor and hit reset on your NodeMCU
+          <li>In order for your computer and the NodeCMU to communicate wirelessly, they must both be on the same wireless network, and know about one another's IP addresses. We need to change the IP address in the python program to match the IP address of the NodeMCU so it knows where
+              to send the data. To find the Node's IP address, open up the serial monitor and hit reset on your NodeMCU
               (if you just see garbage, make sure to change the baud rate of the serial monitor to 115200). It should print
               out the ip address. Be careful when using this in projects, the Node's ip address might change between restarts</li>
-          <li>Save the python sketch with the updated ip address and run it (remember, it's python3, not python2!)</li>
+          <li>Save the python sketch with the updated IP address and run it (remember, it's python3, not python2!) from the terminal by executing the following command from the folder that contains the python code:<br>
+            <br>
+            <pre>$ python3 ./osc_client.py</pre>
+          </li>
           <li>Watch as the LED on your NodeMCU blinks as it recieves data from the computer. You will notice that the LED actually
               turns off when the computer sends a 1 and on when it sends a 0. This is normal, the built in LED on the NodeMCU
               is just weird that way.</li>
           <li>Adjust the python program so the LED blinks in a different pattern</li>
         </ol>
       <h4>Comments</h4>
-        <p>No circuit!</p>
+        <p>The arduino library is
+           written by the <a href="cnmat.berkeley.edu">Center for New Music and Audio Technologies</a> at UC Berkeley that wrote the osc protocol and has great <a href="https://github.com/CNMAT/OSC">documumentation</a>. I would
+           highly recommend checking it out, esspecially te sections on Receiving Data, Routing/Dispatching,
+        and OSCBundles.</p>
       <h4>Other Files</h4>
         <ol>
           <li><a href="ESP8266ReceiveBundle/ESP8266ReceiveBundle.ino">ESP8266ReceiveBundle.ino</a></li>
