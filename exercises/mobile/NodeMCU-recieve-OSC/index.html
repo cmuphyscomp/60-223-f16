@@ -26,9 +26,9 @@
         <p>Another great thing about OSC is that there are lots of applications and libraries that implement the protocol. Some examples include: Ableton Live, Max, PureData, OpenFrameworks, Python, C++, Java, Arduino, Unity, etc; for a comprehensive list of software that can send and receive osc, look <a href="http://opensoundcontrol.org/implementations">here</a>.
            By learning how to send and receive OSC messages from/to our NodeMCU microcontroller, we effectively become capable of communicating between our physical computing inventions, and any of these powerful applications. </p>
         <p>&nbsp;</p>
-      <h4>Steps and observations</h4>
+      <h4>Required Software</h4>
         <ol>
-          <li>First, we need to prep our computers a bit:
+          <li>python-osc package
             <ol>
               <li>For the OSC library, we need to be running python 3. If you are not sure what version of python you have, you can run this command in the terminal: <br>
                 <br>
@@ -39,12 +39,16 @@
                   <br>
                   <pre>$ pip install python-osc</pre>
 If you do not have pip installed (you can tell by typing 'pip' in the command line), then install it using <a href="https://pip.pypa.io/en/stable/installing/">these instructions</a>. </li>
-              <li>Download and install OSC for the Arduino IDE from <a href="https://github.com/CNMAT/OSC">here</a>. The installation instructions are the same as those you followed to install drivers for the I2C ADC board from Adafruit, in the last exercise.</li>
-              <li>We need to make sure that our firewall isn't causing any issues. On mac, the firewall settings are under
-                System Preferences -> Security & Privacy -> Firewall. On PC, it is under Control Panel -> System and Security
-                -> Windows Firewall. You only need to allow the ports we will be using in the examples which are 8888 and 9999.</li>
             </ol>
           </li>
+          <li>OSC Arduino Library: Download and install OSC for the Arduino IDE from <a href="https://github.com/CNMAT/OSC">here</a>. The installation instructions are the same as those you followed to install drivers for the I2C ADC board from Adafruit, in the last exercise.</li>
+          </li>
+          <li>Firewall: We need to make sure that our firewall isn't causing any issues. On mac, the firewall settings are under
+                System Preferences -> Security & Privacy -> Firewall. On PC, it is under Control Panel -> System and Security
+                -> Windows Firewall. You only need to allow the ports we will be using in the examples which are 8888 and 9999.</li>
+        </ol>
+      <h4>Steps and observations</h4>
+        <ol>
           <li>Load the example <a href="ESP8266ReceiveMsg/ESP8266ReceiveMsg.ino">NodeMCU sketch</a>
               and upload it. </li>
           <li>Grab the example <a href="osc_client.py">python program</a> and open it in your editor of choice.</li>
@@ -64,7 +68,7 @@ If you do not have pip installed (you can tell by typing 'pip' in the command li
       <h4>Comments</h4>
         <p>The arduino library is
            written by the <a href="cnmat.berkeley.edu">Center for New Music and Audio Technologies</a> at UC Berkeley that wrote the osc protocol and has great <a href="https://github.com/CNMAT/OSC">documumentation</a>. I would
-           highly recommend checking it out, esspecially te sections on Receiving Data, Routing/Dispatching,
+           highly recommend checking it out, esspecially the sections on Receiving Data, Routing/Dispatching,
         and OSCBundles.</p>
       <h4>Other Files</h4>
         <ol>
