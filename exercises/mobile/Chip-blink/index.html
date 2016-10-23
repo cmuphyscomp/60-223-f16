@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../../support/css/physcomp.css" />
+    <title>Exercise: Chip blink</title>
+  </head>
+  <body>
+    <h2>Exercise: Chip blink</h2>
+      <h4>Objective</h4>
+        <p>Make a LED blink using the Chip computer.</p>
+
+        <p>The Chip is a low-cost computing platform similar to the Raspbery Pi 
+           (Check in the Comments section for a discussion about the similarities and differences between the two).
+           The Chip has built in wifi and runs linux. Since the Chip runs linux (and since there are good libraries), 
+           we can write all of our code in Python.</p>
+
+        <p>Next Thing Co. (NTC), the makers of the chip have created a great documentation page, that they will be adding to
+           as the Chip and its software and libraries evolve. Check it out <a href="http://docs.getchip.com/chip.html">here</a>.
+           We also have a couple of NTC's <a href="http://docs.getchip.com/pocketchip.html">Pocket Chips</a>, which are a cool add on for the chip that gives you a portable, battery powered
+           linux box with a built in screen. If you want to play around with one, talk to us.</p>
+
+      <h4>Steps and observations</h4>
+        <ol>
+          <li>Before we can start writing any code, we need to get our chip set up.
+            <ol>
+              <li>First, we need to get the correct operating system on the Chip. If you are the first to use your chip,
+                  you should already have this. If so, you can skip this step. If not, head over to the 
+                  <a href="http://docs.getchip.com/chip.html#flash-chip-with-an-os">flashing documentation</a>
+                  and flash your Chip with 4.3 GUI. If you have a computer with only USB 3.0 ports (ie. any modern Mac),
+                  you will need to use a USB 2.0 hub or the flashing will not work.</li>
+              <li>Using one of the component to HDMI converters, plug the chip into a monitor, and use a USB hub to attach
+                  a keyboard and mouse to the CHIP. Once booting up, click on the network symbol in the top right and connect
+                  to a wifi network (the lab network will be the easiest to connect to on campus).</li>
+              <li>The rest of our setup will be done on a command line. You can either keep the Chip plugged into a monitor
+                  and open up a terminal or you can ssh into the chip. To ssh, you will have to find the ip address of the Chip.
+                  To do so, open up a terminal run the command: <code>ip addr show wlan0</code>. The ip address will be on the "inet"
+                  line. Next, on a computer connected to the same network as the chip you can ssh using the program of your choice. For PC,
+                  check out <a href="http://www.putty.org/">Putty</a>. For Mac, the ssh command is the easiest. Just open a terminal and type 
+                  <code>ssh user_name@ip_address</code> (ex: <code>ssh chip@192.168.1.12</code>). No matter how you ssh in, 
+                  you will need to use the username "chip" and the password "chip". If you plan to leave the chip connected to the internet
+                  for extended periods of time, make sure to change this default password, or you may get hacked.</li>
+              <li>Install the <a href="https://github.com/xtacocorex/CHIP_IO">CHIP_IO</a> python library 
+                  (Follow the instructions for Python3 as we will be using the python-osc package again). If you are asked
+                  for the sudo password, it is also "chip".</li>
+              <li>Install NTC's fork of the <a href="https://github.com/xtacocorex/Adafruit_Python_GPIO">Adafruit GPIO</a> 
+                  library. This will allow us to write python code that will be easily portable between the Raspberry Pi and the Chip.
+                  Use these commands to install the library:<br>
+                  <code>
+                    sudo apt-get update<br>
+                    sudo apt-get install python-smbus<br>
+                    git clone https://github.com/xtacocorex/Adafruit_Python_GPIO.git<br>
+                    cd Adafruit_Python_GPIO<br>
+                    sudo python3 setup.py install<br>
+                  </code>
+              </li>
+              <li>
+                TO ADD: <ol>
+                  <li>code</li>
+                  <li>discussion about how some GPIO cannot output any usable current (not even enough for an led)</li>
+                  <li>discussion about how to code on the chip: ssh'ed in using nano or scp'ing a file that was written on a personal computer</li>
+                  </ol>
+
+              </li>
+            </ol>
+          </li>
+          <li></li>
+        </ol>
+
+      <h4>Comments</h4>
+        <p>The Chip and Raspberry Pi are both small computers that run Linux on an ARM processor.
+           However, they both have advantages and disadvantages that you should take into account
+           when deciding on which to use in your project. First up, cost: the Raspberry Pi is $30-$35
+           while the chip is only $9. You can borrow both for free from either IDeATe or the class supplies,
+           but the cheaper price means that frying a board on accident has less of a consequence. Next,
+           the camera: the Raspberry Pi has a great camera module that your can also borrow from IDeATe
+           that makes computer vision fast and relatively painless. The chip does not have this. Finally, 
+           advantages for phys comp projects: The Chip is smaller than the Raspberry Pi. This, allong with
+           the Chip's symetric headers make it nicer for embedding into a phys comp project than a Raspberry Pi. 
+           Additionally, the Chip has a plug for a LiPo battery, and it handles all of the charging for you, making
+           adding a battery to your project fairly easy.</p>
+
+        <img src="Chip-blink_bb.png">
+
+  <h4>Other Files</h4>
+        <ol>
+          <li><a href="Chip-blink.fzz">Chip-blink.fzz</a></li>
+          <li><a href="chip-blink.py">chip-blink.py</a></li>
+        </ol>
+        
+  </body>
+</html>
