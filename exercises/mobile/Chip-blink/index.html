@@ -87,6 +87,12 @@
                       </li>
                   </ol>
               </li>
+              <li>Once you have the code on your chip, build the circuit below and then run the command <br>
+                  <code>sudo python3 chip-blink.py</code> to make the led blink.</li>
+              <li>If you want to change which pin the LED is in, just change the variable in the python sketch. Just be forwarned that
+                  some of the pins cannot source much current (not even enough to drive an LED). You can only tell they are working
+                  if you block out most light and look very closely at the LED. However, they are probably strong enough
+                  to drive a MOSFET. I believe this issue is just on the pins that start with "XIO-P".</li>
             </ol>
           </li>
           <li></li>
