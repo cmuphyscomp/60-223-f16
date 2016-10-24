@@ -26,24 +26,26 @@
             <ol>
               <li>First, we need to get the correct operating system on the Chip. If you are the first to use your chip,
                   you should already have this. If so, you can skip this step. If not, head over to the 
-                  <a href="http://docs.getchip.com/chip.html#flash-chip-with-an-os">flashing documentation</a>
+                  <a href="http://docs.getchip.com/chip.html#flash-chip-with-an-os" target="_blank">flashing documentation</a>
                   and flash your Chip with 4.3 GUI. If you have a computer with only USB 3.0 ports (ie. any modern Mac),
                   you will need to use a USB 2.0 hub or the flashing will not work.</li>
-              <li>Using one of the component to HDMI converters, plug the chip into a monitor, and use a USB hub to attach
+              <li>Power the Chip from the USB-micro connector. Make sure to use a USB power supply (one of the 2.4A ones from lending works well) 
+                  and not a USB port on your computer (computer USB ports can't source enough current).
+                  Using one of the component to HDMI converters, plug the chip into a monitor, and use a USB hub to attach
                   a keyboard and mouse to the CHIP. Once booting up, click on the network symbol in the top right and connect
                   to a wifi network (the lab network will be the easiest to connect to on campus).</li>
               <li>The rest of our setup will be done on a command line. You can either keep the Chip plugged into a monitor
                   and open up a terminal or you can ssh into the chip. To ssh, you will have to find the ip address of the Chip.
                   To do so, open up a terminal run the command: <code>ip addr show wlan0</code>. The ip address will be on the "inet"
                   line. Next, on a computer connected to the same network as the chip you can ssh using the program of your choice. For PC,
-                  check out <a href="http://www.putty.org/">Putty</a>. For Mac, the ssh command is the easiest. Just open a terminal and type 
+                  check out <a href="http://www.putty.org/" target="_blank">Putty</a>. For Mac, the ssh command is the easiest. Just open a terminal and type 
                   <code>ssh user_name@ip_address</code> (ex: <code>ssh chip@192.168.1.12</code>). No matter how you ssh in, 
                   you will need to use the username "chip" and the password "chip". If you plan to leave the chip connected to the internet
                   for extended periods of time, make sure to change this default password, or you may get hacked.</li>
-              <li>Install the <a href="https://github.com/xtacocorex/CHIP_IO">CHIP_IO</a> python library 
+              <li>Install the <a href="https://github.com/xtacocorex/CHIP_IO" target="_blank">CHIP_IO</a> python library 
                   (Follow the instructions for Python3 as we will be using the python-osc package again). If you are asked
                   for the sudo password, it is also "chip".</li>
-              <li>Install NTC's fork of the <a href="https://github.com/xtacocorex/Adafruit_Python_GPIO">Adafruit GPIO</a> 
+              <li>Install NTC's fork of the <a href="https://github.com/xtacocorex/Adafruit_Python_GPIO" target="_blank">Adafruit GPIO</a> 
                   library. This will allow us to write python code that will be easily portable between the Raspberry Pi and the Chip.
                   Use these commands to install the library:<br>
                   <code>
@@ -54,13 +56,36 @@
                     sudo python3 setup.py install<br>
                   </code>
               </li>
-              <li>
-                TO ADD: <ol>
-                  <li>code</li>
-                  <li>discussion about how some GPIO cannot output any usable current (not even enough for an led)</li>
-                  <li>discussion about how to code on the chip: ssh'ed in using nano or scp'ing a file that was written on a personal computer</li>
+              <li>Now we need to get our code on the chip. You can find the example program <a href="chip_blink.py" target="_blank">here</a>. 
+                  To get this file (and files you will be writing yourself) onto the Chip, you have 3 options:
+                  <ol>
+                    <li>Open a web browser on the Chip and download the link on the chip.</li>
+                    <li>Open an editor on the Chip and type out the code. If you want to do this in the command line on the chip,
+                        type <code>nano your_file.py</code> in a terminal and it will open your_file.py (or make it if it doesn't exist).
+                        Nano is a basic command line editor that acts a lot like a regular text editor. To save your file, type control-o
+                        and thne hit enter to confirm the file name. Other commands are listed on the bottom of the screen (hit control and then
+                        the letter listed to execute the command).</li>
+                    <li>Transfer the file from your computer to the chip using scp. Scp is a terminal command (or for PC's, a program called
+                        <a href="https://winscp.net/eng/download.php" target="_blank">winscp</a>) that allows us to transfer files between 
+                        our computer and the chip. This allows us to edit files on our computers and then just move them to the chip for testing.
+                        The format of the command is: <code>scp source_file destination_folder</code>. It will copy the 
+                        source_file to destination_folder. For easy reference, here are the two 
+                        commands you will most likely be using (for reference, path is just the "address" of something in your file system. For
+                              example, if you want a file called my_file.py in chip's home directory, the path would be ~/my_file.py): 
+                        <ol>
+                          <li>Move file on your computer to chip: <br>
+                            <code>scp {path_to_file_on computer} chip@{your_chips_ip}:{path_to_folder_on_chip}</code> <br>
+                            ex. <code>scp my_file.py chip@192.168.1.8:~/</code> moves my_file.py from current directory on your computer
+                            to the chip's home directory.
+                          </li>
+                          <li>Move file from chip to your computer: <br>
+                            <code>scp chip@{your_chips_ip}:{path_to_file_on_chip} {path_to_folder_on_computer}</code> <br>
+                            ex. <code>scp chip@192.168.1.8:~/my_file.py .</code> moves my_file.py in chip's home directory
+                            to the current directory on your computer.
+                          </li>
+                        </ol>
+                      </li>
                   </ol>
-
               </li>
             </ol>
           </li>
@@ -84,8 +109,8 @@
 
   <h4>Other Files</h4>
         <ol>
-          <li><a href="Chip-blink.fzz">Chip-blink.fzz</a></li>
-          <li><a href="chip-blink.py">chip-blink.py</a></li>
+          <li><a href="Chip-blink.fzz" target="_blank">Chip-blink.fzz</a></li>
+          <li><a href="chip-blink.py" target="_blank">chip-blink.py</a></li>
         </ol>
         
   </body>
